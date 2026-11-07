@@ -1,0 +1,6 @@
+20a1108c6da4cfa7  .github/release-notes.md
+63831112c692909f  .github/workflows/ci.yml
+a33f006e47e16bb6  .github/workflows/docker.yml
+d38d2e8a19da576f  .github/workflows/test-build.yml
+f2f297ff00ee22aa  .github/workflows/release.yml
+f4e9ba61e0e944cb  .github/scripts/updater-manifest.py

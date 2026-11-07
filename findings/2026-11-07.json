@@ -1,0 +1,133 @@
+{
+  "verdict": "GREEN",
+  "date": "2026-11-07",
+  "findings": [
+    {
+      "level": "info",
+      "check": "cargo-audit",
+      "msg": "5 vulnerability and 7 warning advisories (bugs, not malware). See the list below."
+    }
+  ],
+  "facts": {
+    "upstream_sha": "4d35f31a2491be06b704e8fad39c30e369fd25c4",
+    "upstream_date": "2026-11-07T08:09:25+01:00",
+    "source_hosts": {
+      "api.github.com": [
+        "crates/cli/src/update.rs"
+      ],
+      "bcframe.localhost": [
+        "app/src-tauri/tauri.conf.json",
+        "app/ui/develop.js"
+      ],
+      "creativecommons.org": [
+        "README.md"
+      ],
+      "ffmpeg.martin-riedl.de": [
+        ".github/release-notes.md",
+        ".github/workflows/release.yml",
+        ".github/workflows/test-build.yml",
+        "NOTICE"
+      ],
+      "ffmpeg.org": [
+        ".github/release-notes.md",
+        "NOTICE"
+      ],
+      "github.com": [
+        ".github/scripts/updater-manifest.py",
+        ".github/workflows/release.yml",
+        ".github/workflows/test-build.yml",
+        "Cargo.lock",
+        "Dockerfile"
+      ],
+      "img.shields.io": [
+        "README.md"
+      ],
+      "ipc.localhost": [
+        "app/src-tauri/tauri.conf.json"
+      ],
+      "localhost": [
+        "app/ui/develop.js"
+      ],
+      "rustup.rs": [
+        "README.md"
+      ],
+      "schema.tauri.app": [
+        "app/src-tauri/tauri.conf.json"
+      ],
+      "v2.tauri.app": [
+        "README.md"
+      ],
+      "www.apache.org": [
+        "LICENSE"
+      ],
+      "www.contributor-covenant.org": [
+        "CODE_OF_CONDUCT.md"
+      ],
+      "www.gnu.org": [
+        ".github/release-notes.md",
+        "NOTICE"
+      ],
+      "www.martin-riedl.de": [
+        ".github/release-notes.md",
+        "NOTICE"
+      ],
+      "www.w3.org": [
+        "app/ui/styles.css"
+      ]
+    },
+    "dep_count": 566,
+    "updater_pubkey_b64": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDk1QkM0RjdEQTMzMzdGRDcKUldUWGZ6T2pmVSs4bFNTT25NcUUraHBBeWNSa3dWR3lla0lLQUk5WVJhcHhRVkt0UmpXU3VnL3kK",
+    "release": {
+      "tag": "v1.0.0",
+      "published": "2026-11-07T07:26:25Z",
+      "author": "github-actions[bot]",
+      "tag_sha": "4d35f31a2491be06b704e8fad39c30e369fd25c4",
+      "runs": [
+        "42350079102 push success 2026-11-07T07:09:33Z..2026-11-07T07:24:09Z"
+      ]
+    },
+    "assets": {
+      "Blue-Compressor_1.0.0_macOS_arm64.app.tar.gz": "sha256:0730875244346cadc5683219b9c379daadf06187222facdf76985b2226b776d0",
+      "Blue-Compressor_1.0.0_macOS_arm64.app.tar.gz.sig": "sha256:c0328ff8b0eab74dcfad088fe9b4a34145fc3df22e8e6cdf8dd2c811497f82b0",
+      "Blue-Compressor_1.0.0_macOS_arm64.dmg": "sha256:2a34c6bde4a928de908b438d3e2e103f4311a6ba4c003cfc1bba42286852fc02",
+      "bluecompress-cli_1.0.0_macOS_arm64.tar.gz": "sha256:ed94677618ec61e98662454d126108c7ecc71bcaf33bc08bed7906e0981cd576",
+      "latest.json": "sha256:150e71f7bfcc2ed72a4984a4fca2fb3089392f32649006ad61280c00855ed46c"
+    },
+    "signature": "Signature and comment signature verified\nTrusted comment: timestamp:1794035989\tfile:Blue Compressor.app.tar.gz\tversion:1.0.0",
+    "app_files": 8,
+    "main_binary": {
+      "sha256": "02841f56967fd6135363873e04e5f562e20f95883779e53572d2605bbefdeb7a",
+      "arch": "arm64",
+      "signed": true
+    },
+    "ffmpeg_url": "https://ffmpeg.martin-riedl.de/download/macos/arm64/1789931890_9.0.2/ffmpeg.zip",
+    "ffmpeg": {
+      "bundled": "2e11c6f90993cdb79fff84d3f90044d28316b310e75b3e030cfc9a54f2c9d384",
+      "official": "2e11c6f90993cdb79fff84d3f90044d28316b310e75b3e030cfc9a54f2c9d384",
+      "result": "byte-identical"
+    },
+    "latest_json_version": "1.0.0",
+    "advisories": [
+      "RUSTSEC-2026-0384 tokio 1.54.0: Race condition in `tokio::time::Interval` on Tokio v1.54.0",
+      "RUSTSEC-2026-0429 zip 4.6.1: zip: `ZipArchive::extract` aborts the process on a symlink entry with a large declared size",
+      "RUSTSEC-2026-0367 zip 4.6.1:  Insecure Preservation of SUID/SGID Bits during ZIP Extraction Leading to Potential Privilege Escalation",
+      "RUSTSEC-2026-0368 zip 4.6.1: zip: `ZipArchive::extract` creates symbolic links whose attacker-controlled targets are outside the destination directory",
+      "RUSTSEC-2026-0369 zip 4.6.1: ZipStreamReader::extract() and ZipArchive::extract() apply Unix permissions through symlinks without confining the target",
+      "RUSTSEC-2024-0370 proc-macro-error 1.0.4: proc-macro-error is unmaintained",
+      "RUSTSEC-2026-0371 zbus_names 4.3.5: `zbus_names` is unmaintained",
+      "RUSTSEC-2026-0370 zvariant 5.15.1: `zvariant` is unmaintained",
+      "RUSTSEC-2026-0372 zvariant_derive 5.15.1: `zvariant_derive` is unmaintained",
+      "RUSTSEC-2024-0429 glib 0.18.5: Unsoundness in `Iterator` and `DoubleEndedIterator` impls for `glib::VariantStrIter`",
+      "? async-executor 1.14.0: yanked",
+      "? tokio 1.54.0: yanked"
+    ],
+    "clamav": {
+      "exit": 0,
+      "infected": "",
+      "db": "3628258 signatures",
+      "scanned": "6 files scanned",
+      "error": ""
+    },
+    "virustotal": "skipped (no VT_API_KEY secret)"
+  }
+}

@@ -1,0 +1,1 @@
+base64 app/src-tauri/tauri.conf.json sha256:2fc434d9daa8957c 152 chars

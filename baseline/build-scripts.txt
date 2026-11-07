@@ -1,0 +1,1 @@
+487059eaf8a947b8  app/src-tauri/build.rs

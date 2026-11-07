@@ -1,0 +1,17 @@
+api.github.com
+bcframe.localhost
+creativecommons.org
+ffmpeg.martin-riedl.de
+ffmpeg.org
+github.com
+img.shields.io
+ipc.localhost
+localhost
+rustup.rs
+schema.tauri.app
+v2.tauri.app
+www.apache.org
+www.contributor-covenant.org
+www.gnu.org
+www.martin-riedl.de
+www.w3.org

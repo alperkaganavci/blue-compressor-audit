@@ -1,0 +1,10 @@
+csp default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' ipc: http://ipc.localhost bcframe: http://bcframe.localhost
+identifier org.bluecompressor.desktop
+permission core:default
+permission core:window:allow-close
+permission core:window:allow-start-dragging
+permission dialog:default
+permission opener:default
+updater-endpoint https://github.com/redn3/blue-compressor/releases/latest/download/latest.json
+updater-pubkey dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDk1QkM0RjdEQTMzMzdGRDcKUldUWGZ6T2pmVSs4bFNTT25NcUUraHBBeWNSa3dWR3lla0lLQUk5WVJhcHhRVkt0UmpXU3VnL3kK
+withGlobalTauri True

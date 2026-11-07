@@ -1,0 +1,8 @@
+/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics
+/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+/System/Library/Frameworks/Metal.framework/Versions/A/Metal
+/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore
+/usr/lib/libSystem.B.dylib
+/usr/lib/libiconv.2.dylib
+/usr/lib/libobjc.A.dylib
