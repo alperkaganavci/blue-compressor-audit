@@ -39,7 +39,10 @@ mkdir -p "$here"/{reports,findings,manifests,state}
 cp "$out/report.md" "$here/reports/$name.md"
 cp "$out/findings.json" "$here/findings/$name.json"
 cp "$out"/manifests/*.txt "$here/manifests/" 2>/dev/null || true
-[ -z "$tag" ] && cp "$out/state.json" "$here/state/last.json"
+if [ -z "$tag" ]; then
+  cp "$out/state.json" "$here/state/last.json"
+  python3 -I "$here/scripts/readme_status.py" "$out/findings.json" "reports/$name.md" "$here" > /dev/null
+fi
 if [ ! -d "$here/baseline" ] || $accept; then mkdir -p "$here/baseline"; cp "$out"/inventory/*.txt "$here/baseline/"; echo "baseline written"; fi
 echo "verdict: $(python3 -I -c 'import json,sys; print(json.load(open(sys.argv[1]))["verdict"])' "$out/findings.json")"
 echo "report: reports/$name.md"

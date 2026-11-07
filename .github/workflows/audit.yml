@@ -105,7 +105,11 @@ jobs:
           cp out/report.md "publish/reports/$name.md"
           cp out/findings.json "publish/findings/$name.json"
           cp out/manifests/*.txt publish/manifests/ 2>/dev/null || true
-          [ -z "$RELEASE_TAG" ] && cp out/state.json publish/state/last.json
+          if [ -z "$RELEASE_TAG" ]; then
+            cp out/state.json publish/state/last.json
+            cp README.md publish/README.md
+            python3 -I scripts/readme_status.py out/findings.json "reports/$name.md" publish > /dev/null
+          fi
           if [ ! -d baseline ] || [ "$ACCEPT" = "true" ]; then
             mkdir -p publish/baseline
             cp out/inventory/*.txt publish/baseline/
@@ -153,7 +157,7 @@ jobs:
           cp -R "$RUNNER_TEMP/audit/publish/." .
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add reports findings manifests state
+          git add reports findings manifests state README.md
           [ -d baseline ] && git add baseline
           if git diff --cached --quiet; then echo "Nothing to commit"; exit 0; fi
           git commit -q -m "audit: $(basename "$REPORT" .md) $VERDICT"
