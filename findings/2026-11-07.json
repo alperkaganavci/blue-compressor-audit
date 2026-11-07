@@ -128,6 +128,12 @@
       "scanned": "6 files scanned",
       "error": "ERROR: NotifyClamd: Can't find or parse configuration file /etc/clamav/clamd.conf"
     },
-    "virustotal": "skipped (no VT_API_KEY secret)"
+    "virustotal": {
+      "Blue-Compressor_1.0.0_macOS_arm64.app.tar.gz": "not known to VirusTotal",
+      "Blue-Compressor_1.0.0_macOS_arm64.app.tar.gz.sig": "not known to VirusTotal",
+      "Blue-Compressor_1.0.0_macOS_arm64.dmg": "not known to VirusTotal",
+      "bluecompress-cli_1.0.0_macOS_arm64.tar.gz": "not known to VirusTotal",
+      "latest.json": "not known to VirusTotal"
+    }
   }
 }
