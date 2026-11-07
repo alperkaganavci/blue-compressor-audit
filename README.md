@@ -33,7 +33,7 @@ The audit reads upstream code and release files as **data**. It never builds, ru
 4. `latest.json` (the in-app updater feed) points only at upstream release URLs, and its signature equals the `.sig` asset.
 5. The bundled `ffmpeg` is byte-identical to the build `release.yml` downloads (or has the same code and data sections if only the signature differs), and that download comes from an allowed host.
 6. The app archive has one `.app` folder, no duplicate or non-canonical paths, only the two expected executables, no setuid files and no links that leave the bundle. Linked libraries and URL hosts inside the main binary and the CLI binary are compared with the baseline.
-7. ClamAV scans the downloaded files. A VirusTotal hash lookup (no upload) runs when the `VT_API_KEY` secret is set.
+7. ClamAV scans the downloaded files. VirusTotal looks up the app archive, the DMG and the CLI archive by hash. If VirusTotal does not know a file yet, the audit uploads it, so about 70 antivirus engines scan it, and the report links the public VirusTotal page. Two or more engines flagging a file is RED; one is YELLOW, because a single detection is often a false positive.
 
 **Source (what the next release will contain).**
 

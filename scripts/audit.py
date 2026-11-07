@@ -28,6 +28,7 @@ import struct
 import subprocess
 import sys
 import tarfile
+import time
 import unicodedata
 import urllib.error
 import urllib.request
@@ -504,25 +505,59 @@ class Audit:
             self.add(YELLOW, "clamav", f"ClamAV did not finish (exit {r.get('exit')}): {r.get('error', '')[:300]}")
 
     def virustotal(self):
+        """Look up each release binary on VirusTotal; upload it if VirusTotal does not know it.
+
+        Free public API: 4 requests per minute, so every request waits for the rate limit.
+        Uploaded files become public on VirusTotal (they are public on GitHub already).
+        """
         key = os.environ.get("VT_API_KEY")
         if not key:
             self.facts["virustotal"] = "skipped (no VT_API_KEY secret)"
             return
-        out = {}
+        vt = VirusTotal(key)
+        paths = {Path(p).name: Path(p) for p in self.facts.get("asset_paths", [])}
+        out, pending = {}, {}
         for name, digest in self.facts.get("assets", {}).items():
+            if name.endswith((".sig", ".json")):
+                continue  # text files, nothing to scan
             h = digest.split(":", 1)[1]
-            req = urllib.request.Request(f"https://www.virustotal.com/api/v3/files/{h}", headers={"x-apikey": key, "User-Agent": UA})
+            link = f"https://www.virustotal.com/gui/file/{h}"
             try:
-                with urllib.request.urlopen(req, timeout=60) as r:
-                    st = json.load(r)["data"]["attributes"]["last_analysis_stats"]
-                out[name] = f"{st.get('malicious', 0)} malicious, {st.get('suspicious', 0)} suspicious of {sum(st.values())}"
-                if st.get("malicious", 0) >= 2:
-                    self.add(RED, "virustotal", f"{q(name)}: {out[name]}.")
-                elif st.get("malicious", 0) or st.get("suspicious", 0):
-                    self.add(YELLOW, "virustotal", f"{q(name)}: {out[name]}.")
-            except urllib.error.HTTPError as e:
-                out[name] = "not known to VirusTotal" if e.code == 404 else f"HTTP {e.code}"
+                st = vt.stats(h)
+                if st is None and name in paths and os.environ.get("VT_UPLOAD", "1") == "1":
+                    pending[name] = (vt.upload(paths[name]), h, link)
+                    out[name] = f"uploaded for scanning ({link})"
+                    continue
+                out[name] = self.vt_judge(name, st, link) if st else "not known to VirusTotal"
+            except Exception as e:  # noqa: BLE001
+                out[name] = f"VirusTotal error: {type(e).__name__}: {e}"
+                self.add(YELLOW, "virustotal", f"VirusTotal check of {q(name)} failed: {q(e)}")
+        deadline = time.monotonic() + int(os.environ.get("VT_WAIT_SECONDS", "900"))
+        while pending and time.monotonic() < deadline:
+            for name, (aid, h, link) in list(pending.items()):
+                try:
+                    st = vt.analysis(aid)
+                except Exception as e:  # noqa: BLE001
+                    out[name] = f"uploaded; polling failed: {type(e).__name__} ({link})"
+                    pending.pop(name)
+                    continue
+                if st is not None:
+                    out[name] = self.vt_judge(name, st, link)
+                    pending.pop(name)
+        for name, (_, _, link) in pending.items():
+            out[name] = f"uploaded, scan still running; see {link}"
+            self.add(INFO, "virustotal", f"{q(name)} was uploaded to VirusTotal; the scan did not finish in time. The next run reads it.")
         self.facts["virustotal"] = out
+
+    def vt_judge(self, name: str, st: dict, link: str) -> str:
+        bad, sus = st.get("malicious", 0), st.get("suspicious", 0)
+        scanned = bad + sus + st.get("undetected", 0) + st.get("harmless", 0)
+        text = f"{bad} malicious, {sus} suspicious of {scanned} engines ({link})"
+        if bad >= 2:
+            self.add(RED, "virustotal", f"{q(name)}: {text}.")
+        elif bad or sus:
+            self.add(YELLOW, "virustotal", f"{q(name)}: {text}. One engine alone is often a false positive; read the detection names.")
+        return text
 
     # ---------------------------------------------------------------- output
     def state(self) -> dict:
@@ -581,6 +616,49 @@ class Audit:
         (self.out / "state.json").write_text(json.dumps({
             "upstream_sha": self.facts.get("upstream_sha"), "release_tag": rel.get("tag"),
             "checked": today, "verdict": v}, indent=2) + "\n")
+
+
+class VirusTotal:
+    """Small VirusTotal v3 client for the free API (4 requests per minute)."""
+
+    API = "https://www.virustotal.com/api/v3"
+    GAP = 16.0  # seconds between requests
+
+    def __init__(self, key: str):
+        self.key, self.last = key, 0.0
+
+    def _req(self, url: str, data: bytes | None = None, ctype: str | None = None, timeout: int = 120):
+        wait = self.last + self.GAP - time.monotonic()
+        if wait > 0:
+            time.sleep(wait)
+        self.last = time.monotonic()
+        req = urllib.request.Request(url, data=data, headers={"x-apikey": self.key, "User-Agent": UA})
+        if ctype:
+            req.add_header("Content-Type", ctype)
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return json.load(r)
+
+    def stats(self, sha256: str) -> dict | None:
+        try:
+            return self._req(f"{self.API}/files/{sha256}")["data"]["attributes"]["last_analysis_stats"]
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                return None
+            raise
+
+    def upload(self, path: Path) -> str:
+        url = f"{self.API}/files"
+        if path.stat().st_size > 32 * 1024 * 1024:
+            url = self._req(f"{self.API}/files/upload_url")["data"]
+        boundary = "----bcaudit" + hashlib.sha256(path.name.encode()).hexdigest()[:24]
+        head = (f"--{boundary}\r\nContent-Disposition: form-data; name=\"file\"; filename=\"{path.name}\"\r\n"
+                "Content-Type: application/octet-stream\r\n\r\n").encode()
+        body = head + path.read_bytes() + f"\r\n--{boundary}--\r\n".encode()
+        return self._req(url, body, f"multipart/form-data; boundary={boundary}", timeout=600)["data"]["id"]
+
+    def analysis(self, analysis_id: str) -> dict | None:
+        a = self._req(f"{self.API}/analyses/{analysis_id}")["data"]["attributes"]
+        return a["stats"] if a.get("status") == "completed" else None
 
 
 def hosts_in(data: bytes) -> list[str]:
