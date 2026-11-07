@@ -7,9 +7,11 @@ The README design is locked: this script replaces only the text between
 <!-- status:start --> and <!-- status:end -->. Everything else in README.md is
 written by hand and stays as it is.
 """
+import html
 import json
 import re
 import sys
+import urllib.parse
 from pathlib import Path
 
 START, END = "<!-- status:start -->", "<!-- status:end -->"
@@ -19,9 +21,16 @@ ICON = {"GREEN": "🟢", "YELLOW": "🟡", "RED": "🔴"}
 COLOR = {"GREEN": "brightgreen", "YELLOW": "yellow", "RED": "red"}
 
 
+TAG_RE = re.compile(r"^v?[0-9A-Za-z._-]{1,64}$")
+SHA_RE = re.compile(r"^[0-9a-f]{40}$")
+
+
 def cell(text: str) -> str:
-    """Make upstream-derived text safe for one Markdown table cell."""
-    return re.sub(r"\s+", " ", str(text)).replace("|", "\\|").replace("`", "'").replace("@", "(at)")
+    """Make upstream-derived text safe for one Markdown table cell: one line, HTML
+    escaped, Markdown specials escaped, no backticks, no @mentions."""
+    t = html.escape(re.sub(r"\s+", " ", str(text)), quote=True)
+    t = t.replace("`", "'").replace("@", "(at)")
+    return re.sub(r"([\\|\[\]()!*_~#<>])", r"\\\1", t)
 
 
 def vt_cell(facts: dict) -> str:
@@ -44,23 +53,30 @@ def main():
     findings, report, root = json.loads(Path(sys.argv[1]).read_text()), sys.argv[2], Path(sys.argv[3])
     v, f = findings["verdict"], findings["facts"]
     rel = f.get("release", {})
-    tag = cell(rel.get("tag", "?"))
+    raw_tag = str(rel.get("tag", ""))
+    tag_ok = bool(TAG_RE.fullmatch(raw_tag))
+    tag = raw_tag if tag_ok else "invalid tag"
+    raw_sha = str(f.get("upstream_sha", ""))
+    sha_ok = bool(SHA_RE.fullmatch(raw_sha))
     sig = f.get("signature") or ""
     ff = (f.get("ffmpeg") or {}).get("result", "not checked")
     cv = f.get("clamav") or {}
     clam = {0: "clean", 1: "FOUND", 2: "error"}.get(cv.get("exit"), "not run")
     reds = sum(1 for x in findings["findings"] if x["level"] == "red")
     yellows = sum(1 for x in findings["findings"] if x["level"] == "yellow")
-    sha = cell(f.get("upstream_sha", "?"))[:7]
+    sha = raw_sha[:7] if sha_ok else "unknown"
+    first_run = (rel.get("runs") or [""])[0].split()
+    run_id = first_run[0] if first_run and first_run[0].isdigit() else ""
     rows = [
         ("Verdict", f"{ICON.get(v, '')} **{v}**" + (f" ({reds} red, {yellows} yellow)" if reds or yellows else "")),
-        ("Release", f"[`{tag}`]({UPSTREAM}/releases/tag/{tag}) · macOS Apple silicon"),
+        ("Release", (f"[`{tag}`]({UPSTREAM}/releases/tag/{urllib.parse.quote(tag, safe='')})" if tag_ok else "⚠️ invalid tag")
+         + " · macOS Apple silicon"),
         ("Updater signature", "✅ verified" if "verified" in sig.lower() else "❌ " + (cell(sig)[:80] or "not checked")),
         ("Bundled ffmpeg", ("✅ " if ff.startswith(("byte-identical", "same code")) else "❌ ") + cell(ff)),
-        ("Built by", f"✅ upstream `release.yml`, run {cell(rel['runs'][0].split()[0])}" if rel.get("runs") else "❌ no release run found"),
+        ("Built by", f"✅ upstream `release.yml`, run {run_id}" if run_id else "❌ no release run found"),
         ("ClamAV", ("✅ " if clam == "clean" else "❌ ") + f"{clam} ({cell(cv.get('db', '?'))})"),
         ("VirusTotal (detections/engines)", vt_cell(f)),
-        ("Source checked", f"[`{sha}`]({UPSTREAM}/commit/{cell(f.get('upstream_sha', ''))}) on `main`"),
+        ("Source checked", f"[`{sha}`]({UPSTREAM}/commit/{raw_sha}) on `main`" if sha_ok else "⚠️ unknown commit"),
         ("Checked", f"{cell(findings.get('date', '?'))} · [full report]({report})"),
     ]
     block = "\n".join([START, "", "| Check | Result |", "|---|---|", *[f"| {k} | {val} |" for k, val in rows], "", END])
