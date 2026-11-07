@@ -129,11 +129,9 @@
       "error": "ERROR: NotifyClamd: Can't find or parse configuration file /etc/clamav/clamd.conf"
     },
     "virustotal": {
-      "Blue-Compressor_1.0.0_macOS_arm64.app.tar.gz": "not known to VirusTotal",
-      "Blue-Compressor_1.0.0_macOS_arm64.app.tar.gz.sig": "not known to VirusTotal",
-      "Blue-Compressor_1.0.0_macOS_arm64.dmg": "not known to VirusTotal",
-      "bluecompress-cli_1.0.0_macOS_arm64.tar.gz": "not known to VirusTotal",
-      "latest.json": "not known to VirusTotal"
+      "Blue-Compressor_1.0.0_macOS_arm64.app.tar.gz": "0 malicious, 0 suspicious of 62 engines (https://www.virustotal.com/gui/file/0730875244346cadc5683219b9c379daadf06187222facdf76985b2226b776d0)",
+      "Blue-Compressor_1.0.0_macOS_arm64.dmg": "0 malicious, 0 suspicious of 61 engines (https://www.virustotal.com/gui/file/2a34c6bde4a928de908b438d3e2e103f4311a6ba4c003cfc1bba42286852fc02)",
+      "bluecompress-cli_1.0.0_macOS_arm64.tar.gz": "0 malicious, 0 suspicious of 62 engines (https://www.virustotal.com/gui/file/ed94677618ec61e98662454d126108c7ecc71bcaf33bc08bed7906e0981cd576)"
     }
   }
 }
