@@ -1,72 +1,7 @@
 {
-  "verdict": "YELLOW",
+  "verdict": "GREEN",
   "date": "2026-11-09",
   "findings": [
-    {
-      "level": "yellow",
-      "check": "authors",
-      "msg": "New commit author: `alperkaganavci <16538592+alperkaganavci(at)users.noreply.github.com>`."
-    },
-    {
-      "level": "yellow",
-      "check": "source",
-      "msg": "New risky source token: `network | .github/scripts/test_updater_sign.sh | curl x1`. Lines: `L12: curl -fsSL -o \"$work/cargo-tauri.tgz\" \"$url\"`"
-    },
-    {
-      "level": "yellow",
-      "check": "source",
-      "msg": "New risky source token: `network | .github/workflows/release.yml | curl x4`. Lines: `L105: curl -fsSL -o /tmp/ffmpeg.zip \"${{ matrix.ffmpeg }}\"`; `L119: curl -fsSL -o /tmp/ffmpeg.zip \"${{ matrix.ffmpeg }}\"`; `L126: curl -fsSL -o /tmp/ffmpeg.tar.xz \"${{ matrix.ffmpeg }}\"`"
-    },
-    {
-      "level": "yellow",
-      "check": "source",
-      "msg": "New risky source token: `process | .github/scripts/test_updater_sign.sh | /bin/sh x1`. Lines: `L32: printf '#!/bin/sh\\ntouch %s\\n' \"$marker\" >\"$fixture\"`"
-    },
-    {
-      "level": "info",
-      "check": "source",
-      "msg": "1 risky source token line(s) from the baseline are gone."
-    },
-    {
-      "level": "yellow",
-      "check": "workflows",
-      "msg": "New changed CI/release file: `5b203e09aec0998f .github/scripts/test_release_hardening.py`."
-    },
-    {
-      "level": "yellow",
-      "check": "workflows",
-      "msg": "New changed CI/release file: `64390018a7b2433a .github/scripts/release_environment.py`."
-    },
-    {
-      "level": "yellow",
-      "check": "workflows",
-      "msg": "New changed CI/release file: `6870fae53928258a .github/workflows/test-build.yml`."
-    },
-    {
-      "level": "yellow",
-      "check": "workflows",
-      "msg": "New changed CI/release file: `796b9e5d383ef1fa .github/workflows/release.yml`."
-    },
-    {
-      "level": "yellow",
-      "check": "workflows",
-      "msg": "New changed CI/release file: `83a046f002c51ce0 .github/scripts/test_updater_sign.sh`."
-    },
-    {
-      "level": "yellow",
-      "check": "workflows",
-      "msg": "New changed CI/release file: `bc74a02fb35dc85c .github/workflows/ci.yml`."
-    },
-    {
-      "level": "yellow",
-      "check": "workflows",
-      "msg": "New changed CI/release file: `e8df5ab7f7ba02f2 .github/release-notes.md`."
-    },
-    {
-      "level": "info",
-      "check": "workflows",
-      "msg": "4 changed CI/release file line(s) from the baseline are gone."
-    },
     {
       "level": "info",
       "check": "cargo-audit",

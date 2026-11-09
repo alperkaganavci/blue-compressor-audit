@@ -34,7 +34,7 @@
 
 | Check | Result |
 |---|---|
-| Verdict | 🟡 **YELLOW** (0 red, 11 yellow) |
+| Verdict | 🟢 **GREEN** |
 | Release | [`v1.0.1`](https://github.com/redn3/blue-compressor/releases/tag/v1.0.1) · macOS Apple silicon |
 | Updater signature | ✅ verified |
 | Bundled ffmpeg | ✅ byte-identical |
