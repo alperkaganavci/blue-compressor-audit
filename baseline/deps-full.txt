@@ -10,7 +10,7 @@ arrayvec 0.7.8 registry
 ash 0.38.0+1.3.281 registry
 async-broadcast 0.7.2 registry
 async-channel 2.5.0 registry
-async-executor 1.14.0 registry
+async-executor 1.14.1 registry
 async-io 2.6.0 registry
 async-lock 3.4.2 registry
 async-process 2.5.0 registry
@@ -34,9 +34,9 @@ bitflags 2.13.2 registry
 block-buffer 0.10.4 registry
 block2 0.6.2 registry
 blocking 1.7.0 registry
-blue-compressor-app 1.0.0 path
-bluecompress 1.0.0 path
-bluecompress-cli 1.0.0 path
+blue-compressor-app 1.0.1 path
+bluecompress 1.0.1 path
+bluecompress-cli 1.0.1 path
 brotli 9.0.0 registry
 brotli-decompressor 6.0.1 registry
 bs58 0.5.1 registry
@@ -422,7 +422,7 @@ time-core 0.1.9 registry
 time-macros 0.2.32 registry
 tinystr 0.8.4 registry
 tinyvec 1.13.3 registry
-tokio 1.54.0 registry
+tokio 1.54.1 registry
 tokio-rustls 0.26.6 registry
 tokio-util 0.7.20 registry
 toml 0.8.2 registry

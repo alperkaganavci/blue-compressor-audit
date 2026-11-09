@@ -1,6 +1,9 @@
-20a1108c6da4cfa7  .github/release-notes.md
-63831112c692909f  .github/workflows/ci.yml
+5b203e09aec0998f  .github/scripts/test_release_hardening.py
+64390018a7b2433a  .github/scripts/release_environment.py
+6870fae53928258a  .github/workflows/test-build.yml
+796b9e5d383ef1fa  .github/workflows/release.yml
+83a046f002c51ce0  .github/scripts/test_updater_sign.sh
 a33f006e47e16bb6  .github/workflows/docker.yml
-d38d2e8a19da576f  .github/workflows/test-build.yml
-f2f297ff00ee22aa  .github/workflows/release.yml
+bc74a02fb35dc85c  .github/workflows/ci.yml
+e8df5ab7f7ba02f2  .github/release-notes.md
 f4e9ba61e0e944cb  .github/scripts/updater-manifest.py

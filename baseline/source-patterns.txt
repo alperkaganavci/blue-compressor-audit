@@ -12,7 +12,8 @@ fs-wide | crates/cli/src/main.rs | remove_dir_all x6
 fs-wide | crates/core/src/bmff.rs | remove_dir_all x1
 fs-wide | crates/core/src/develop.rs | remove_dir_all x1
 fs-wide | crates/core/src/drive.rs | remove_dir_all x1
-network | .github/workflows/release.yml | curl x3
+network | .github/scripts/test_updater_sign.sh | curl x1
+network | .github/workflows/release.yml | curl x4
 network | .github/workflows/test-build.yml | curl x1
 network | app/ui/develop.js | fetch( x1
 network | crates/cli/src/main.rs | TcpListener x1
@@ -21,6 +22,7 @@ network | crates/cli/src/serve.rs | TcpListener x2
 network | crates/cli/src/serve.rs | TcpStream x5
 network | crates/cli/src/update.rs | ureq:: x1
 obfuscation | crates/cli/src/main.rs | \x00\x00\x00 x1
+process | .github/scripts/test_updater_sign.sh | /bin/sh x1
 process | app/icons/make_icon.py | system( x1
 process | crates/core/src/develop.rs | Command::new x1
 process | crates/core/src/prores_raw.rs | Command::new x4
