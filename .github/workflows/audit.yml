@@ -164,7 +164,8 @@ jobs:
           git push origin HEAD:main
 
       - name: Notify through an issue when a person must look
-        if: needs.scan.outputs.verdict != 'GREEN'
+        # An accept run follows a human review, so it does not ask for another one.
+        if: needs.scan.outputs.verdict != 'GREEN' && inputs.accept_baseline != true
         env:
           GH_TOKEN: ${{ github.token }}
           VERDICT: ${{ needs.scan.outputs.verdict }}
