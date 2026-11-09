@@ -89,7 +89,7 @@ def main():
     (root / "state").mkdir(exist_ok=True)
     (root / "state" / "badge.json").write_text(json.dumps({
         "schemaVersion": 1, "label": "latest audit", "message": f"{v} · {tag}",
-        "color": COLOR.get(v, "lightgrey"), "cacheSeconds": 3600}) + "\n")
+        "color": COLOR.get(v, "lightgrey"), "cacheSeconds": 300}) + "\n")
     print(block)
 
 
