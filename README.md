@@ -34,15 +34,15 @@
 
 | Check | Result |
 |---|---|
-| Verdict | 🟢 **GREEN** |
-| Release | [`v1.0.0`](https://github.com/redn3/blue-compressor/releases/tag/v1.0.0) · macOS Apple silicon |
+| Verdict | 🟡 **YELLOW** (0 red, 11 yellow) |
+| Release | [`v1.0.1`](https://github.com/redn3/blue-compressor/releases/tag/v1.0.1) · macOS Apple silicon |
 | Updater signature | ✅ verified |
 | Bundled ffmpeg | ✅ byte-identical |
-| Built by | ✅ upstream `release.yml`, run 42350079102 |
+| Built by | ✅ upstream `release.yml`, run 42587861297 |
 | ClamAV | ✅ clean (3628258 signatures) |
-| VirusTotal (detections/engines) | [app 0/62](https://www.virustotal.com/gui/file/0730875244346cadc5683219b9c379daadf06187222facdf76985b2226b776d0) · [dmg 0/61](https://www.virustotal.com/gui/file/2a34c6bde4a928de908b438d3e2e103f4311a6ba4c003cfc1bba42286852fc02) · [cli 0/62](https://www.virustotal.com/gui/file/ed94677618ec61e98662454d126108c7ecc71bcaf33bc08bed7906e0981cd576) |
-| Source checked | [`4d35f31`](https://github.com/redn3/blue-compressor/commit/4d35f31a2491be06b704e8fad39c30e369fd25c4) on `main` |
-| Checked | 2026-11-07 · [full report](reports/2026-11-07.md) |
+| VirusTotal (detections/engines) | [app 0/61](https://www.virustotal.com/gui/file/80180a582a610912c321ee45e589672b2f9ed6e5ea0a3bd1fe934c5201a42555) · [dmg 0/61](https://www.virustotal.com/gui/file/6702056545bffc1fd6caa578689ae172b16a77039121ad43022bb8d80a6be985) · [cli 0/61](https://www.virustotal.com/gui/file/c495c94950cafde13ba61a35c76b1ad8b1a53803a1db31461ac65a4947b7cd03) |
+| Source checked | [`8f27d72`](https://github.com/redn3/blue-compressor/commit/8f27d7225ef55c6a306a3814de33df7f42cc8160) on `main` |
+| Checked | 2026-11-09 · [full report](reports/2026-11-09.md) |
 
 <!-- status:end -->
 
