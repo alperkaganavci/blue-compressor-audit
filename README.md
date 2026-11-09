@@ -15,7 +15,7 @@
 
 **A weekly, read-only check that the Blue Compressor app you download is the app its source says it is.**
 
-[![Latest audit](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Falperkaganavci%2Fblue-compressor-audit%2Fmain%2Fstate%2Fbadge.json&style=flat-square)](reports/)
+[![Latest audit](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Falperkaganavci%2Fblue-compressor-audit%2Fmain%2Fstate%2Fbadge.json&style=flat-square&cacheSeconds=300)](reports/)
 [![Weekly malware audit](https://img.shields.io/github/actions/workflow/status/alperkaganavci/blue-compressor-audit/audit.yml?branch=main&style=flat-square&label=workflow)](https://github.com/alperkaganavci/blue-compressor-audit/actions/workflows/audit.yml)
 [![Upstream](https://img.shields.io/badge/upstream-redn3%2Fblue--compressor-0c0e13?style=flat-square&logo=github)](https://github.com/redn3/blue-compressor)
 
