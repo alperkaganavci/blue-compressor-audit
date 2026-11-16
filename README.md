@@ -39,10 +39,10 @@
 | Updater signature | ✅ verified |
 | Bundled ffmpeg | ✅ byte-identical |
 | Built by | ✅ upstream `release.yml`, run 42587861297 |
-| ClamAV | ✅ clean (3628258 signatures) |
+| ClamAV | ✅ clean (3628275 signatures) |
 | VirusTotal (detections/engines) | [app 0/61](https://www.virustotal.com/gui/file/80180a582a610912c321ee45e589672b2f9ed6e5ea0a3bd1fe934c5201a42555) · [dmg 0/61](https://www.virustotal.com/gui/file/6702056545bffc1fd6caa578689ae172b16a77039121ad43022bb8d80a6be985) · [cli 0/61](https://www.virustotal.com/gui/file/c495c94950cafde13ba61a35c76b1ad8b1a53803a1db31461ac65a4947b7cd03) |
 | Source checked | [`8f27d72`](https://github.com/redn3/blue-compressor/commit/8f27d7225ef55c6a306a3814de33df7f42cc8160) on `main` |
-| Checked | 2026-11-09 · [full report](reports/2026-11-09.md) |
+| Checked | 2026-11-16 · [full report](reports/2026-11-16.md) |
 
 <!-- status:end -->
 

@@ -1,0 +1,136 @@
+{
+  "verdict": "GREEN",
+  "date": "2026-11-16",
+  "findings": [
+    {
+      "level": "info",
+      "check": "cargo-audit",
+      "msg": "4 vulnerability and 6 warning advisories (bugs, not malware). See the list below."
+    }
+  ],
+  "facts": {
+    "upstream_sha": "8f27d7225ef55c6a306a3814de33df7f42cc8160",
+    "upstream_date": "2026-11-09T09:30:11+01:00",
+    "source_hosts": {
+      "api.github.com": [
+        ".github/scripts/release_environment.py",
+        "crates/cli/src/update.rs"
+      ],
+      "bcframe.localhost": [
+        "app/src-tauri/tauri.conf.json",
+        "app/ui/develop.js"
+      ],
+      "creativecommons.org": [
+        "README.md"
+      ],
+      "ffmpeg.martin-riedl.de": [
+        ".github/release-notes.md",
+        ".github/workflows/release.yml",
+        ".github/workflows/test-build.yml",
+        "NOTICE"
+      ],
+      "ffmpeg.org": [
+        ".github/release-notes.md",
+        "NOTICE"
+      ],
+      "github.com": [
+        ".github/scripts/test_release_hardening.py",
+        ".github/scripts/test_updater_sign.sh",
+        ".github/scripts/updater-manifest.py",
+        ".github/workflows/release.yml",
+        ".github/workflows/test-build.yml"
+      ],
+      "img.shields.io": [
+        "README.md"
+      ],
+      "ipc.localhost": [
+        "app/src-tauri/tauri.conf.json"
+      ],
+      "localhost": [
+        "app/ui/develop.js"
+      ],
+      "rustup.rs": [
+        "README.md"
+      ],
+      "schema.tauri.app": [
+        "app/src-tauri/tauri.conf.json"
+      ],
+      "v2.tauri.app": [
+        "README.md"
+      ],
+      "www.apache.org": [
+        "LICENSE"
+      ],
+      "www.contributor-covenant.org": [
+        "CODE_OF_CONDUCT.md"
+      ],
+      "www.gnu.org": [
+        ".github/release-notes.md",
+        "NOTICE"
+      ],
+      "www.martin-riedl.de": [
+        ".github/release-notes.md",
+        "NOTICE"
+      ],
+      "www.w3.org": [
+        "app/ui/styles.css"
+      ]
+    },
+    "dep_count": 566,
+    "updater_pubkey_b64": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDk1QkM0RjdEQTMzMzdGRDcKUldUWGZ6T2pmVSs4bFNTT25NcUUraHBBeWNSa3dWR3lla0lLQUk5WVJhcHhRVkt0UmpXU3VnL3kK",
+    "release": {
+      "tag": "v1.0.1",
+      "published": "2026-11-09T09:09:07Z",
+      "author": "github-actions[bot]",
+      "tag_sha": "8f27d7225ef55c6a306a3814de33df7f42cc8160",
+      "runs": [
+        "42587861297 push success 2026-11-09T08:42:08Z..2026-11-09T09:02:52Z"
+      ]
+    },
+    "assets": {
+      "Blue-Compressor_1.0.1_macOS_arm64.app.tar.gz": "sha256:80180a582a610912c321ee45e589672b2f9ed6e5ea0a3bd1fe934c5201a42555",
+      "Blue-Compressor_1.0.1_macOS_arm64.app.tar.gz.sig": "sha256:62674c0cca9d62a360f0263a35b3992c4c172592cdb0902ab3e4215d81831b9e",
+      "Blue-Compressor_1.0.1_macOS_arm64.dmg": "sha256:6702056545bffc1fd6caa578689ae172b16a77039121ad43022bb8d80a6be985",
+      "bluecompress-cli_1.0.1_macOS_arm64.tar.gz": "sha256:c495c94950cafde13ba61a35c76b1ad8b1a53803a1db31461ac65a4947b7cd03",
+      "latest.json": "sha256:f253ea2d7ce5da056a6c293d21d03562fc4a8ff9eb2bd1bfc434d0e450072d2b"
+    },
+    "signature": "Signature and comment signature verified\nTrusted comment: timestamp:1794214830\tfile:Blue-Compressor_1.0.1_macOS_arm64.app.tar.gz\tversion:1.0.1",
+    "app_files": 8,
+    "main_binary": {
+      "sha256": "ccf8ebd18831c1e26d85b6f0aaa3e60a84bc45698ac68405a9681e1ea846a8cf",
+      "arch": "arm64",
+      "signed": true
+    },
+    "ffmpeg_url": "https://ffmpeg.martin-riedl.de/download/macos/arm64/1789931890_9.0.2/ffmpeg.zip",
+    "ffmpeg": {
+      "bundled": "2e11c6f90993cdb79fff84d3f90044d28316b310e75b3e030cfc9a54f2c9d384",
+      "official": "2e11c6f90993cdb79fff84d3f90044d28316b310e75b3e030cfc9a54f2c9d384",
+      "result": "byte-identical"
+    },
+    "latest_json_version": "1.0.1",
+    "advisories": [
+      "RUSTSEC-2026-0429 zip 4.6.1: zip: `ZipArchive::extract` aborts the process on a symlink entry with a large declared size",
+      "RUSTSEC-2026-0367 zip 4.6.1:  Insecure Preservation of SUID/SGID Bits during ZIP Extraction Leading to Potential Privilege Escalation",
+      "RUSTSEC-2026-0369 zip 4.6.1: ZipStreamReader::extract() and ZipArchive::extract() apply Unix permissions through symlinks without confining the target",
+      "RUSTSEC-2026-0368 zip 4.6.1: zip: `ZipArchive::extract` creates symbolic links whose attacker-controlled targets are outside the destination directory",
+      "RUSTSEC-2024-0370 proc-macro-error 1.0.4: proc-macro-error is unmaintained",
+      "RUSTSEC-2026-0371 zbus_names 4.3.5: `zbus_names` is unmaintained",
+      "RUSTSEC-2026-0370 zvariant 5.15.1: `zvariant` is unmaintained",
+      "RUSTSEC-2026-0372 zvariant_derive 5.15.1: `zvariant_derive` is unmaintained",
+      "RUSTSEC-2024-0429 glib 0.18.5: Unsoundness in `Iterator` and `DoubleEndedIterator` impls for `glib::VariantStrIter`",
+      "RUSTSEC-2026-0486 rustix 1.1.5: xattr functions mark unwritten bytes as initialized when given a zero-length buffer"
+    ],
+    "clamav": {
+      "exit": 0,
+      "infected": "",
+      "db": "3628275 signatures",
+      "scanned": "6 files scanned",
+      "error": "ERROR: NotifyClamd: Can't find or parse configuration file /etc/clamav/clamd.conf"
+    },
+    "virustotal": {
+      "Blue-Compressor_1.0.1_macOS_arm64.app.tar.gz": "0 malicious, 0 suspicious of 61 engines (https://www.virustotal.com/gui/file/80180a582a610912c321ee45e589672b2f9ed6e5ea0a3bd1fe934c5201a42555)",
+      "Blue-Compressor_1.0.1_macOS_arm64.dmg": "0 malicious, 0 suspicious of 61 engines (https://www.virustotal.com/gui/file/6702056545bffc1fd6caa578689ae172b16a77039121ad43022bb8d80a6be985)",
+      "bluecompress-cli_1.0.1_macOS_arm64.tar.gz": "0 malicious, 0 suspicious of 61 engines (https://www.virustotal.com/gui/file/c495c94950cafde13ba61a35c76b1ad8b1a53803a1db31461ac65a4947b7cd03)"
+    }
+  }
+}
